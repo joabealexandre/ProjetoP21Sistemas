@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class Jogador
+    public class Morte
     {
-        public int Id { get; set; }
-
-        public string  Nome { get; set; }
-
-        public Morte Mortes { get; set; }
+        public CausaMorte CausaMorte { get; set; }
     }
 }

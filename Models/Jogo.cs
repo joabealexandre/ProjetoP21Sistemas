@@ -8,8 +8,7 @@ namespace Models
 {
     public class Jogo
     {
-        public int Id { get; set; }
-        public string Inicio { get; set; }
-        public string Fim { get; set; } 
+        public IList<Game> Games { get; set; }
+
     }
 }

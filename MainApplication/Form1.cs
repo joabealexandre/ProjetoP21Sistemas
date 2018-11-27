@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
+using ReaderStructure;
 
 namespace MainApplication
 {
@@ -15,6 +10,13 @@ namespace MainApplication
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+           var filePath = Environment.CurrentDirectory + "\\games.log";
+
+            var Jogo = new GameFileReader(filePath).LerJogo();
         }
     }
 }
