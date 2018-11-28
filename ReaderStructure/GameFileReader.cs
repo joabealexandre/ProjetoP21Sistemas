@@ -19,7 +19,6 @@ namespace ReaderStructure
         Kill
     }
 
-
     public class GameFileReader
     {
         public GameFileReader(string filePath)
@@ -35,17 +34,17 @@ namespace ReaderStructure
         /// <returns></returns>
         public Jogo LerJogo()
         {
-            Jogo Jogos = new Jogo();
+            Jogo jogos = new Jogo();
 
             if (File.Exists(FilePath))
             {
                 using(var reader = new StreamReader(FilePath))
                 {
-                    Jogos.Games = LerPartidas(reader);
+                    jogos.Games = LerPartidas(reader);
                 }
             }
 
-            return null;
+            return jogos;
         }
 
         /// <summary>

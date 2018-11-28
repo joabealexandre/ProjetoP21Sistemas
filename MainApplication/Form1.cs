@@ -14,9 +14,7 @@ namespace MainApplication
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           var filePath = Environment.CurrentDirectory + "\\games.log";
-
-            var Jogo = new GameFileReader(filePath).LerJogo();
+           
         }
     }
 }
