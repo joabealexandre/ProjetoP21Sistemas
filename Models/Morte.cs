@@ -8,6 +8,8 @@ namespace Models
 {
     public class Morte
     {
+        public Jogador Jogador1 { get; set; }
+        public Jogador Jogador2 { get; set; }
         public CausaMorte CausaMorte { get; set; }
     }
 }

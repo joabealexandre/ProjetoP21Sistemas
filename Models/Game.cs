@@ -8,10 +8,14 @@ namespace Models
 {
     public class Game
     {
+        public Game()
+        {
+            Jogadores = new List<Jogador>();
+            Mortes = new List<Morte>();
+        }
+
         public int Id { get; set; }
-        public string Inicio { get; set; }
-        public string Fim { get; set; }
         public List<Jogador> Jogadores { get; set; }
-        public List<Morte> TotalGameMortes { get; set; }
+        public List<Morte> Mortes { get; set; }
     }
 }

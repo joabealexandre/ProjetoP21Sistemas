@@ -9,9 +9,7 @@ namespace Models
     public class Jogador
     {
         public int Id { get; set; }
-
         public string  Nome { get; set; }
-
-        public Morte Mortes { get; set; }
+        public int Kills { get; set; }
     }
 }

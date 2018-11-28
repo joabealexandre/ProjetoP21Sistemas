@@ -9,6 +9,5 @@ namespace Models
     public class Jogo
     {
         public IList<Game> Games { get; set; }
-
     }
 }

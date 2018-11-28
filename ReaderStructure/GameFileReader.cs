@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using Models;
 
 namespace ReaderStructure
@@ -64,22 +66,25 @@ namespace ReaderStructure
                 //Início do Game
                 if(str[1].Contains(StatusGame.InitGame.ToString()))
                 {
-                    game = new Game
-                    {
-                        Inicio = str[0]
-                    };
+                    game = new Game();
                 }
 
                 //Informações sobre jogador
                 else if (str[1].Contains(StatusGame.ClientUserinfoChanged.ToString()))
                 {
+                    var nome = GetNomejogador(linha);
 
+                    //Adiciona jogador que não existe ainda
+                    if(!game.Jogadores.Where(x => x.Nome == nome).Any())
+                    {
+                        game.Jogadores.Add(new Jogador { Nome = nome });
+                    }
                 }
 
                 //Kill
                 else if (str[1].Contains(StatusGame.Kill.ToString()))
                 {
-
+                    GravaJogadaLinha(game, linha);
                 }
 
                 //Fim do Game
@@ -89,16 +94,81 @@ namespace ReaderStructure
                     //Jogo ainda aberto, finalizando
                     if(game != null)
                     {
-
+                        // 1º Jogo não tem nenhuma ação (Kill -> verificar)
+                        jogo.Add(game);
+                        game = null;
                     }
                 }
-
             }
 
-
-            return null;
+            return jogo;
         }
 
-    }
+        public string GetNomejogador(string linha)
+        {
+            var txt = linha.Split('\\');
+            return txt[1];
+        }
 
+        public void GravaJogadaLinha(Game game, string linha)
+        {
+            var retorno = GetJogadoresECausa(linha);
+
+            var jogador1 = retorno[0];
+            var jogador2 = retorno[1];
+            Enum.TryParse(retorno[2], out CausaMorte causaMorte);
+
+
+            var morte = new Morte
+            {
+                Jogador1 = game.Jogadores.Find(x => x.Nome == jogador1),
+                Jogador2 = game.Jogadores.Find(x => x.Nome == jogador2),
+                CausaMorte = causaMorte
+            };
+
+            //** Se <world>
+            if(jogador1 == "<world>")
+            {
+                foreach (var item in game.Jogadores)
+                {
+                    if (item.Nome.Contains(jogador2))
+                    {
+                        item.Kills = item.Kills != 0 ? item.Kills - 1 : 0 ;
+                    }
+                }
+            }
+            //** Jogada normal
+            else
+            {
+                foreach (var item in game.Jogadores)
+                {
+                    if (item.Nome.Contains(jogador1))
+                    {
+                        item.Kills++;
+                    }
+                }
+            }
+
+            game.Mortes.Add(morte);
+        }
+
+        /// <summary>
+        /// Retorna os jogadores e causa morte
+        /// </summary>
+        /// <param name="linha">Linha do log</param>
+        /// <returns></returns>
+        public string[] GetJogadoresECausa(string linha)
+        {
+            var str = linha.Split(':')[3].Trim();
+            var tempStr = str.Split(new string[] { "killed" }, StringSplitOptions.None);
+
+            var jogador1 = tempStr[0].Trim();
+            var jogador2 = tempStr[1].Trim().Split(new string[] { "by" }, StringSplitOptions.None)[0].Trim();
+
+            var arrayLinha = linha.Trim().Split(' ');
+            var causaMorte = arrayLinha.Last();
+
+            return new string[] { jogador1, jogador2, causaMorte};
+        }
+    }
 }
