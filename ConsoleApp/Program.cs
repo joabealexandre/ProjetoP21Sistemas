@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Controller;
+using Models;
 
 namespace ConsoleApp
 {
@@ -22,6 +23,7 @@ namespace ConsoleApp
             var jogo = jogoController.GetJogo(filePath);
 
             Console.WriteLine(jogoController.GetJogoString(jogo));
+
         }
     }
 }
