@@ -44,7 +44,8 @@
     <Compile Include="DALCausaMorte.cs" />
     <Compile Include="DALGame.cs" />
     <Compile Include="DALJogador.cs" />
-    <Compile Include="DALJogadoresGame.cs" />
+    <Compile Include="DALJogadorGame.cs" />
+    <Compile Include="DALMorte.cs" />
     <Compile Include="IPersistense.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

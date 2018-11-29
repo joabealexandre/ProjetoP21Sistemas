@@ -2,42 +2,36 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class DALJogadoresGame : IPersistense<Game>
+    public class DALMorte : IPersistense<Morte>
     {
         private string connectionString = "";
 
-        public DALJogadoresGame()
+        public DALMorte()
         {
             connectionString = "Data Source=(local)\\SQLEXPRESS;Initial Catalog=QuakeLog;Integrated Security=True";
         }
 
-        public void Save(Game entity)
+        public void Save(Morte entity)
         {
-            if (entity.Jogadores == null)
-                return;
-
             using (var conn = new SqlConnection(connectionString))
             {
-                string sql = "INSERT INTO JogadoresGame (IdGame, IdJogador) Values(@v1, @v2)";
+                var sql = "INSERT INTO MortesJogo (IdGame, IdJogadorUm, IdJogadorDois, idCausaMorte) " +
+                    "           Values(@v1, @v2, @v3, @v4)";
+
                 SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@v1", entity.IdGame);
+                cmd.Parameters.AddWithValue("@v2", entity.Jogador1.Id);
+                cmd.Parameters.AddWithValue("@v3", entity.Jogador2.Id);
+                cmd.Parameters.AddWithValue("@v4", (int)entity.CausaMorte);
 
                 try
                 {
                     conn.Open();
-
-                    foreach (var jogador in entity.Jogadores)
-                    {
-                        cmd.Parameters.AddWithValue("@v1", entity.Id);
-                        cmd.Parameters.AddWithValue("@v2", jogador.Id);
-                        cmd.ExecuteNonQuery();
-                    }
-                }
+                    cmd.ExecuteNonQuery();
+                }     
                 catch (Exception e)
                 {
                     throw e;
@@ -49,16 +43,14 @@ namespace DAL
             }
         }
 
-        public List<Game> GetAll()
+        public List<Morte> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Game GetByNome(string s)
+        public Morte GetByNome(string s)
         {
             throw new NotImplementedException();
         }
-
-        
     }
 }

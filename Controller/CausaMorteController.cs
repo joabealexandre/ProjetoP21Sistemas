@@ -1,5 +1,6 @@
 ﻿using Models;
 using System;
+using DAL;
 
 namespace Controller
 {
@@ -9,7 +10,8 @@ namespace Controller
         {
             foreach (CausaMorte item in (CausaMorte[])Enum.GetValues(typeof(CausaMorte)))
             {
-                Console.WriteLine(item.ToString());
+                DALCausaMorte DAL = new DALCausaMorte();
+                DAL.Save(item);
             }
         }
     }

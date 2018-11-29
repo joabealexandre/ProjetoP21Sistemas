@@ -11,7 +11,10 @@ namespace Models
         public Jogo()
         {
             Games = new List<Game>();
-            Jogadores = new List<Jogador>();
+            Jogadores = new List<Jogador>
+            {
+                new Jogador() { Nome = "<world>" }
+            };
         }
 
         public List<Game> Games { get; set; }

@@ -11,5 +11,7 @@ namespace Models
         public Jogador Jogador1 { get; set; }
         public Jogador Jogador2 { get; set; }
         public CausaMorte CausaMorte { get; set; }
+
+        public int IdGame { get; set; }
     }
 }

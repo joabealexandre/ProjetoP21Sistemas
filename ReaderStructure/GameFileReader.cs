@@ -78,7 +78,11 @@ namespace ReaderStructure
 
                     if (!game.Jogadores.Where(x => x.Id == jogador.Id).Any())
                     {
-                        var jogadorGame = new JogadorGame(jogador);
+                        var jogadorGame = new JogadorGame(jogador)
+                        {
+                            IdGame = game.Id
+                        };
+
                         game.Jogadores.Add(jogadorGame);
                     }
                 }
@@ -162,6 +166,8 @@ namespace ReaderStructure
             //** Se <world>
             if(jogador1 == "<world>")
             {
+                morte.Jogador1 = Jogo.Jogadores.Find(x => x.Id == 1);
+
                 foreach (var item in game.Jogadores)
                 {
                     if (item.Nome.Contains(jogador2))
@@ -182,6 +188,7 @@ namespace ReaderStructure
                 }
             }
 
+            morte.IdGame = game.Id;
             game.Mortes.Add(morte);
         }
 

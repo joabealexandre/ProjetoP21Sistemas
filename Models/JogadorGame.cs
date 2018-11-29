@@ -16,5 +16,7 @@ namespace Models
             this.Nome = jogador.Nome;
             this.Kills = 0;
         }
+
+        public int IdGame { get; set; }
     }
 }

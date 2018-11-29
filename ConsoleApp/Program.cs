@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Controller;
 using Models;
+using DAL;
 
 namespace ConsoleApp
 {
@@ -23,6 +24,18 @@ namespace ConsoleApp
             var jogo = jogoController.GetJogo(filePath);
 
             Console.WriteLine(jogoController.GetJogoString(jogo));
+
+            //GravaJogoNoBanco(jogo);
+        }
+
+        public static void GravaJogoNoBanco(Jogo jogo)
+        {
+            //Grava Enum no banco
+            CausaMorteController causaMorteController = new CausaMorteController();
+            causaMorteController.SalvarEnumsBanco();
+
+            JogoController jogoController = new JogoController();
+            jogoController.SalvarJogoNoBanco(jogo);
 
         }
     }

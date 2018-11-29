@@ -1,6 +1,7 @@
 ﻿using Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -122,6 +123,20 @@ namespace DAL
                     conn.Close();
                 }
             }
+        }
+
+        public Game GetGamesDataSet()
+        {
+            using(var conn = new SqlConnection(connectionString))
+            {
+                string queryString = "SELECT * FROM Game";
+                SqlDataAdapter adapter = new SqlDataAdapter(queryString, connectionString);
+
+                DataSet game = new DataSet();
+                adapter.Fill(game, "Game");
+            }
+
+            return null;
         }
     }
 }

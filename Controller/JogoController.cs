@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAL;
 
 namespace Controller
 {
@@ -53,10 +54,17 @@ namespace Controller
 
         public string GetKillsJogadorPorGame(List<Morte> mortes)
         {
-            
-
-
             return "";
+        }
+
+        public void SalvarJogoNoBanco(Jogo jogo)
+        {
+            
+            JogadorController jogadorController = new JogadorController();
+            jogadorController.SalvarJogadorNoBanco(jogo.Jogadores);
+
+            GameController gameController = new GameController();
+            gameController.SalvarGameNoBanco(jogo.Games);
         }
     }
 }

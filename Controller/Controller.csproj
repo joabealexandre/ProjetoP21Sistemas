@@ -42,7 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CausaMorteController.cs" />
+    <Compile Include="GameController.cs" />
+    <Compile Include="JogadorController.cs" />
+    <Compile Include="JogadorGameController.cs" />
     <Compile Include="JogoController.cs" />
+    <Compile Include="MorteController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

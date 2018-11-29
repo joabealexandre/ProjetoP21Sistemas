@@ -18,10 +18,11 @@ namespace DAL
         {
             using(var conn = new SqlConnection(connectionString))
             {
-                string sql = "INSERT INTO Jogador (Nome, Kills) Values(@v1, @v2)";
+                string sql = "INSERT INTO Jogador (Id, Nome, Kills) Values(@v1, @v2, @v3)";
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@v1", entity.Nome);
-                cmd.Parameters.AddWithValue("@v2", entity.Kills);
+                cmd.Parameters.AddWithValue("@v1", entity.Id);
+                cmd.Parameters.AddWithValue("@v2", entity.Nome);
+                cmd.Parameters.AddWithValue("@v3", entity.Kills);
 
                 try
                 {
@@ -110,6 +111,31 @@ namespace DAL
                         }
                         return jogador;
                     }
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public void UpdateKills(Jogador entity)
+        {
+            using (var conn = new SqlConnection(connectionString))
+            {
+                string sql = "UPDATE Jogador SET Kills = @v1 WHERE Id = @v2";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@v1", entity.Kills);
+                cmd.Parameters.AddWithValue("@v2", entity.Id);
+
+                try
+                {
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
                 }
                 catch (Exception e)
                 {

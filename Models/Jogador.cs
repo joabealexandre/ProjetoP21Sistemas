@@ -16,7 +16,7 @@ namespace Models
             contador++;
         }
 
-        public Jogador(string nome) : base()
+        public Jogador(string nome)
         {
             Nome = nome;
         }
