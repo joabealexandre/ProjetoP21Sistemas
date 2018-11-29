@@ -27,6 +27,8 @@ namespace ReaderStructure
         }
 
         public string FilePath { get; set; }
+        public Jogo Jogo { get; set; }
+
 
         /// <summary>
         /// Processa todo o jogo retornando o resultado do log
@@ -34,17 +36,15 @@ namespace ReaderStructure
         /// <returns></returns>
         public Jogo LerJogo()
         {
-            Jogo jogos = new Jogo();
-
             if (File.Exists(FilePath))
             {
                 using(var reader = new StreamReader(FilePath))
                 {
-                    jogos.Games = LerPartidas(reader);
+                    Jogo = new Jogo();
+                    LerPartidas(reader);
                 }
             }
-
-            return jogos;
+            return Jogo;
         }
 
         /// <summary>
@@ -52,9 +52,8 @@ namespace ReaderStructure
         /// </summary>
         /// <param name="reader"></param>
         /// <returns></returns>
-        public List<Game> LerPartidas(StreamReader reader)
+        public void LerPartidas(StreamReader reader)
         {
-            var jogo = new List<Game>();
             Game game = null;
             var linha = string.Empty;
 
@@ -73,10 +72,15 @@ namespace ReaderStructure
                 {
                     var nome = GetNomejogador(linha);
 
-                    //Adiciona jogador que não existe ainda
-                    if(!game.Jogadores.Where(x => x.Nome == nome).Any())
+                    var jogador = GetJogadorByName(nome);
+
+                    //Adiciona novo jogador ao Jogo
+                    if (!Jogo.Jogadores.Where(x => x.Nome == nome).Any())
+                        Jogo.Jogadores.Add(jogador);
+
+                    if (!game.Jogadores.Where(x => x.Nome == nome).Any())
                     {
-                        game.Jogadores.Add(new Jogador { Nome = nome });
+                        game.Jogadores.Add(jogador);
                     }
                 }
 
@@ -94,19 +98,36 @@ namespace ReaderStructure
                     if(game != null)
                     {
                         // 1º Jogo não tem nenhuma ação (Kill -> verificar)
-                        jogo.Add(game);
+                        Jogo.Games.Add(game);
                         game = null;
                     }
                 }
             }
-
-            return jogo;
         }
 
         public string GetNomejogador(string linha)
         {
             var txt = linha.Split('\\');
             return txt[1];
+        }
+
+        public Jogador GetJogadorByName(string nome)
+        {
+            Jogador jogador = Jogo.Jogadores.Where(x => x.Nome == nome).FirstOrDefault();
+
+            if (jogador != null)
+            {
+                return jogador;
+            }
+            else
+            {
+                jogador = new Jogador
+                {
+                    Nome = nome
+                };
+            }
+
+            return jogador;
         }
 
         public void GravaJogadaLinha(Game game, string linha)
@@ -132,7 +153,7 @@ namespace ReaderStructure
                 {
                     if (item.Nome.Contains(jogador2))
                     {
-                        item.Kills = item.Kills != 0 ? item.Kills - 1 : 0 ;
+                        item.Kills = item.Kills != 0 ? item.Kills - 1 : 0 ; //Diminui 1 kill para morte por <world>
                     }
                 }
             }

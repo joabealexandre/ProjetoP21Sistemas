@@ -27,11 +27,11 @@ namespace Controller
 
             for (int i = 0; i < jogo.Games.Count; i++)
             {
-                sb.Append("game_" + (i + 1) + ": {"+ Environment.NewLine);
+                sb.Append(jogo.Games[i].Nome + ": { "+ Environment.NewLine);
                 sb.Append("\t total_kills: " + jogo.Games[i].Mortes.Count+ ";" + Environment.NewLine);
 
                 //** Jogadores
-                sb.Append("\t players: [ ");
+                sb.Append("\t players: [");
                 for (int j = 0; j < jogo.Games[i].Jogadores.Count; j++)
                 {
                     sb.Append("\"" + jogo.Games[i].Jogadores[j].Nome + "\"" + (j != jogo.Games[i].Jogadores.Count -1 ? ", " : "]" + Environment.NewLine ));
@@ -49,6 +49,14 @@ namespace Controller
             }
 
             return sb.ToString(); ;
+        }
+
+        public string GetKillsJogadorPorGame(List<Morte> mortes)
+        {
+            
+
+
+            return "";
         }
     }
 }

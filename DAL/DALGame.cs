@@ -1,27 +1,31 @@
-﻿using System;
+﻿using Models;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using Models;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class DALJogador : IPersistense<Jogador>
+    public class DALGame : IPersistense<Game>
     {
+
         private string connectionString = "";
 
-        public DALJogador()
+        public DALGame()
         {
             connectionString = "Data Source=(local)\\SQLEXPRESS;Initial Catalog=QuakeLog;Integrated Security=True";
         }
 
-        public void Save(Jogador entity)
+        public void Save(Game entity)
         {
-            using(var conn = new SqlConnection(connectionString))
+            using (var conn = new SqlConnection(connectionString))
             {
-                string sql = "INSERT INTO Jogador (Nome, Kills) Values(@v1, @v2)";
+                string sql = "INSERT INTO Game (Id, Nome) Values (@v1, @v2)";
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@v1", entity.Nome);
-                cmd.Parameters.AddWithValue("@v2", entity.Kills);
+                cmd.Parameters.AddWithValue("@v1", entity.Id);
+                cmd.Parameters.AddWithValue("@v2", entity.Nome);
 
                 try
                 {
@@ -39,38 +43,37 @@ namespace DAL
             }
         }
 
-        public List<Jogador> GetAll()
+        public List<Game> GetAll()
         {
             using (var conn = new SqlConnection(connectionString))
             {
                 string sql = "SELECT * FROM Game";
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                List<Jogador> jogadores;
-                Jogador j = null;
+                List<Game> games;
+                Game g = null;
 
                 try
                 {
                     conn.Open();
-                    
-                    using(var reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection))
+
+                    using (var reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection))
                     {
                         if (reader.HasRows)
-                            jogadores = new List<Jogador>();
+                            games = new List<Game>();
                         else
                             return null;
 
                         while (reader.Read())
                         {
-                            j = new Jogador
+                            g = new Game
                             {
                                 Id = Convert.ToInt32(reader["Id"].ToString()),
-                                Nome = reader["Nome"].ToString(),
-                                Kills = Convert.ToInt32(reader["Kills"].ToString())
+                                Nome = reader["Nome"].ToString()
                             };
 
-                            jogadores.Add(j);
+                            games.Add(g);
                         }
-                        return jogadores;
+                        return games;
                     }
                 }
                 catch (Exception e)
@@ -84,14 +87,14 @@ namespace DAL
             }
         }
 
-        public Jogador GetByNome(string nome)
+        public Game GetByNome(string s)
         {
             using (var conn = new SqlConnection(connectionString))
             {
-                string sql = "SELECT * FROM Jogador WHERE Nome = @v1";
+                string sql = "SELECT * FROM Game WHERE Nome = @v1";
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@v1", nome);
-                Jogador jogador = null;
+                cmd.Parameters.AddWithValue("@v1", s);
+                Game game = null;
 
                 try
                 {
@@ -101,14 +104,13 @@ namespace DAL
                     {
                         if (reader.Read())
                         {
-                            jogador = new Jogador
+                            game = new Game
                             {
                                 Id = Convert.ToInt32(reader["Id"].ToString()),
-                                Nome = reader["Nome"].ToString(),
-                                Kills = Convert.ToInt32(reader["Kills"].ToString())
+                                Nome = reader["Nome"].ToString()
                             };
                         }
-                        return jogador;
+                        return game;
                     }
                 }
                 catch (Exception e)

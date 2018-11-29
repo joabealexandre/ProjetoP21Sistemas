@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DALCausaMorte.cs" />
+    <Compile Include="DALGame.cs" />
     <Compile Include="DALJogador.cs" />
+    <Compile Include="DALJogadoresGame.cs" />
     <Compile Include="IPersistense.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

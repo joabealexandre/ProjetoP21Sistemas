@@ -8,6 +8,14 @@ namespace Models
 {
     public class Jogador
     {
+        public static int contador = 1;
+
+        public Jogador()
+        {
+            Id = contador;
+            contador++;
+        }
+
         public int Id { get; set; }
         public string  Nome { get; set; }
         public int Kills { get; set; }
