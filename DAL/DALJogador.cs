@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using Models;
 
@@ -73,6 +74,50 @@ namespace DAL
                         }
                         return jogadores;
                     }
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public DataTable GetAllDataTable(string nome = "")
+        {
+            using (var conn = new SqlConnection(connectionString))
+            {
+                string sql = "";
+                SqlCommand cmd = null;
+
+                if (!string.IsNullOrEmpty(nome))
+                {
+                    sql = "SELECT * FROM Jogador WHERE Id != 1 AND Nome LIKE @v1 Order By Kills DESC";
+                    cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@v1", "%" + nome + "%");
+                }
+                else
+                {
+                    sql = "SELECT * FROM Jogador WHERE Id != 1 Order By Kills DESC";
+                    cmd = new SqlCommand(sql, conn);
+                }
+
+                DataTable dataTable = null;
+
+                try
+                {
+                    conn.Open();
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        dataTable = new DataTable();
+                        dataTable.Load(reader);
+                    }
+
+                    return dataTable;
                 }
                 catch (Exception e)
                 {

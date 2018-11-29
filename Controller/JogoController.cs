@@ -59,7 +59,6 @@ namespace Controller
 
         public void SalvarJogoNoBanco(Jogo jogo)
         {
-            
             JogadorController jogadorController = new JogadorController();
             jogadorController.SalvarJogadorNoBanco(jogo.Jogadores);
 
