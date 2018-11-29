@@ -14,14 +14,14 @@ namespace Models
         {
             Id = contador;
             Nome = "game_" + contador;
-            Jogadores = new List<Jogador>();
+            Jogadores = new List<JogadorGame>();
             Mortes = new List<Morte>();
             contador++;
         }
 
         public int Id { get; set; }
         public string Nome { get; set; }
-        public List<Jogador> Jogadores { get; set; }
+        public List<JogadorGame> Jogadores { get; set; }
         public List<Morte> Mortes { get; set; }
     }
 }

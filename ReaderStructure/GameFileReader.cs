@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -67,20 +66,20 @@ namespace ReaderStructure
                     game = new Game();
                 }
 
-                //Informações sobre jogador
+                //Informações sobre jogador - Adiciona ao Jogo/Game
                 else if (str[1].Contains(StatusGame.ClientUserinfoChanged.ToString()))
                 {
-                    var nome = GetNomejogador(linha);
-
-                    var jogador = GetJogadorByName(nome);
+                    string nome = GetNomejogador(linha);
+                    Jogador jogador = GetJogadorByName(nome);
 
                     //Adiciona novo jogador ao Jogo
-                    if (!Jogo.Jogadores.Where(x => x.Nome == nome).Any())
+                    if (!Jogo.Jogadores.Where(x => x.Id == jogador.Id).Any())
                         Jogo.Jogadores.Add(jogador);
 
-                    if (!game.Jogadores.Where(x => x.Nome == nome).Any())
+                    if (!game.Jogadores.Where(x => x.Id == jogador.Id).Any())
                     {
-                        game.Jogadores.Add(jogador);
+                        var jogadorGame = new JogadorGame(jogador);
+                        game.Jogadores.Add(jogadorGame);
                     }
                 }
 
@@ -97,7 +96,21 @@ namespace ReaderStructure
                     //Jogo ainda aberto, finalizando
                     if(game != null)
                     {
-                        // 1º Jogo não tem nenhuma ação (Kill -> verificar)
+                        //Grava as kills no Jogo geral
+                        if (game.Jogadores != null)
+                        {
+                            if(game.Id == 5)
+                            {
+                                Console.WriteLine("");
+                            }
+
+                            foreach (var item in game.Jogadores)
+                            {
+                                var j = Jogo.Jogadores.Find(x => x.Id == item.Id);
+                                j.Kills += item.Kills; 
+                            }
+                        }
+
                         Jogo.Games.Add(game);
                         game = null;
                     }

@@ -14,7 +14,7 @@ namespace Models
             Jogadores = new List<Jogador>();
         }
 
-        public IList<Game> Games { get; set; }
-        public IList<Jogador> Jogadores { get; set; }
+        public List<Game> Games { get; set; }
+        public List<Jogador> Jogadores { get; set; }
     }
 }

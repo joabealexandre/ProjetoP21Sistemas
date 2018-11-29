@@ -16,6 +16,11 @@ namespace Models
             contador++;
         }
 
+        public Jogador(string nome) : base()
+        {
+            Nome = nome;
+        }
+
         public int Id { get; set; }
         public string  Nome { get; set; }
         public int Kills { get; set; }

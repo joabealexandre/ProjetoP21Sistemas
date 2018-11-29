@@ -44,6 +44,7 @@
     <Compile Include="CausaMorte.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Jogador.cs" />
+    <Compile Include="JogadorGame.cs" />
     <Compile Include="Jogo.cs" />
     <Compile Include="Morte.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
