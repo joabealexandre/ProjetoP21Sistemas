@@ -50,7 +50,7 @@
             this.MinimizeBox = false;
             this.Name = "TextAreaView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Ranking Mortes";
+            this.Text = "Ranking";
             this.ResumeLayout(false);
             this.PerformLayout();
 
