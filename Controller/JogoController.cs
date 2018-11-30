@@ -52,9 +52,36 @@ namespace Controller
             return sb.ToString(); ;
         }
 
-        public string GetKillsJogadorPorGame(List<Morte> mortes)
+        public string GetMortesJogoString(Jogo jogo)
         {
-            return "";
+            StringBuilder sb = new StringBuilder("");
+
+            if (jogo == null || jogo.Games == null)
+                return sb.ToString();
+
+            for (int i = 0; i < jogo.Games.Count; i++)
+            {
+                sb.Append("game-" + jogo.Games[i].Id + "\": {" + Environment.NewLine);
+                sb.Append("\t kills_by_means: {" + Environment.NewLine);
+
+                //Método para contabilizar mortes/game
+                var mortes = jogo.Games[i].Mortes
+                                            .GroupBy(l => l.CausaMorte)
+                                            .Select(g => new
+                                            {
+                                                CausaMorte = g.Key,
+                                                Count = g.Select(l => l.CausaMorte).Count()
+                                            }).OrderBy(o => o.CausaMorte).ToList();
+
+                for (int j = 0; j < mortes.Count; j++)
+                {
+                    sb.Append("\t\t \"" + mortes[j].CausaMorte + "\": " + mortes[j].Count + (j != mortes.Count - 1 ? "," + Environment.NewLine : Environment.NewLine));
+                }
+                sb.Append("\t }" + Environment.NewLine);
+                sb.Append("}" + Environment.NewLine);
+            }
+
+            return sb.ToString();
         }
 
         public void SalvarJogoNoBanco(Jogo jogo)

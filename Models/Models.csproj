@@ -47,6 +47,7 @@
     <Compile Include="JogadorGame.cs" />
     <Compile Include="Jogo.cs" />
     <Compile Include="Morte.cs" />
+    <Compile Include="MorteGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

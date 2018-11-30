@@ -74,6 +74,13 @@ namespace DAL
 
                             games.Add(g);
                         }
+
+                        //Popular games com demais dados 
+                        foreach (var item in games)
+                        {
+
+                        }
+
                         return games;
                     }
                 }
@@ -125,7 +132,7 @@ namespace DAL
             }
         }
 
-        public Game GetGamesDataSet()
+        /*public Game GetGamesDataSet()
         {
             using(var conn = new SqlConnection(connectionString))
             {
@@ -137,6 +144,6 @@ namespace DAL
             }
 
             return null;
-        }
+        }*/
     }
 }

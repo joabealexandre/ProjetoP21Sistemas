@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using DAL;
 using Models;
 
@@ -25,6 +27,5 @@ namespace Controller
                 SalvarMorteNoBanco(item);
             }
         }
-
     }
 }

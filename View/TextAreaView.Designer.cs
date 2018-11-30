@@ -1,6 +1,6 @@
 ﻿namespace View
 {
-    partial class RankingGeralMortes
+    partial class TextAreaView
     {
         /// <summary>
         /// Required designer variable.
@@ -28,24 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtOutput = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // textBox1
+            // txtOutput
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 45);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(471, 436);
-            this.textBox1.TabIndex = 0;
+            this.txtOutput.Location = new System.Drawing.Point(12, 12);
+            this.txtOutput.Multiline = true;
+            this.txtOutput.Name = "txtOutput";
+            this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtOutput.Size = new System.Drawing.Size(657, 469);
+            this.txtOutput.TabIndex = 0;
             // 
-            // RankingGeralMortes
+            // TextAreaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(495, 493);
-            this.Controls.Add(this.textBox1);
-            this.Name = "RankingGeralMortes";
+            this.ClientSize = new System.Drawing.Size(681, 493);
+            this.Controls.Add(this.txtOutput);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "TextAreaView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ranking Mortes";
             this.ResumeLayout(false);
@@ -55,6 +58,6 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtOutput;
     }
 }

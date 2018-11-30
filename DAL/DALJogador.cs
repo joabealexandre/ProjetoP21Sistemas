@@ -45,7 +45,7 @@ namespace DAL
         {
             using (var conn = new SqlConnection(connectionString))
             {
-                string sql = "SELECT * FROM Game";
+                string sql = "SELECT * FROM Jogador";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 List<Jogador> jogadores;
                 Jogador j = null;

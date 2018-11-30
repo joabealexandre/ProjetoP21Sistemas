@@ -50,11 +50,11 @@
     <Compile Include="RankingGeralJogadores.Designer.cs">
       <DependentUpon>RankingGeralJogadores.cs</DependentUpon>
     </Compile>
-    <Compile Include="RankingGeralMortes.cs">
+    <Compile Include="TextAreaView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RankingGeralMortes.Designer.cs">
-      <DependentUpon>RankingGeralMortes.cs</DependentUpon>
+    <Compile Include="TextAreaView.Designer.cs">
+      <DependentUpon>TextAreaView.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -71,8 +71,8 @@
     <EmbeddedResource Include="RankingGeralJogadores.resx">
       <DependentUpon>RankingGeralJogadores.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RankingGeralMortes.resx">
-      <DependentUpon>RankingGeralMortes.cs</DependentUpon>
+    <EmbeddedResource Include="TextAreaView.resx">
+      <DependentUpon>TextAreaView.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

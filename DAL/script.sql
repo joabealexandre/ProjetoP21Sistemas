@@ -65,3 +65,10 @@ CREATE TABLE MortesJogo(
 	CONSTRAINT fk_causa_morte	FOREIGN KEY (idCausaMorte) REFERENCES CausaMorte(Id)
 );
 GO
+
+CREATE VIEW VM_MORTES_GAME_TOTAL
+AS
+	SELECT idCausaMorte, COUNT(idCausaMorte) AS Mortes, IdGame
+	FROM MortesJogo
+	GROUP BY IdGame, idCausaMorte;
+GO
