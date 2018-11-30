@@ -11,4 +11,7 @@ ADO.NET
 
 * Executar este [script](https://github.com/joabealexandre/ProjetoP21Sistemas/blob/master/DAL/script.sql) para criar o banco de dados  
 * Baixar o projeto e restaurar os pacotes e referências (build)  
-* Setar o projeto *MainApplication* como aplição de início e execultar.
+* Setar o projeto *MainApplication* como aplição de início e execultar.  
+  
+  
+  ![Modelo](https://raw.githubusercontent.com/joabealexandre/ProjetoP21Sistemas/master/ClassDiagram.png)
